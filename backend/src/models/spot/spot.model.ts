@@ -1,6 +1,6 @@
 import { Column, DataType, HasMany, Model, Table } from 'sequelize-typescript';
-import {Reservation} from "../reservation/reservation.model";
-import {ApiProperty} from "@nestjs/swagger";
+import { Reservation } from "../reservation/reservation.model";
+import { ApiProperty } from "@nestjs/swagger";
 
 @Table({ tableName: 'parking-spots' })
 

@@ -6,7 +6,7 @@ import { IReservation } from "../Interfaces/IReservation";
 import { FindOptions } from 'sequelize/types';
 import { ReservationDto } from "./dto/reservation.dto";
 import { History } from "../models/history/history.model";
-import { BOOKED, CANCELED } from "../constants";
+import { CANCELED } from "../constants";
 
 @Injectable()
 export class ReservationService implements IReservationService {
@@ -53,12 +53,13 @@ export class ReservationService implements IReservationService {
   }
 
   private async intoHistory(payload: ReservationDto) {
+    console.log(payload.status)
     await this.historyModel.create({
       user_id: payload.user_id,
       parking_spot_number: payload.parking_spot_number,
       reserved_date: payload.reserved_date,
       reserved_time: payload.reserved_time,
-      status: BOOKED,
+      status: payload.status,
     });
   }
 

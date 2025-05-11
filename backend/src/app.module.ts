@@ -11,6 +11,7 @@ import { Reservation } from "./models/reservation/reservation.model";
 import { ReservationModule } from "./reservations/reservation.module";
 import { HistoryModule } from "./history/history.module";
 import { History } from "./models/history/history.model";
+import { MockDataService } from "./mocking/MockDataService";
 
 @Module({
   imports: [
@@ -40,6 +41,6 @@ import { History } from "./models/history/history.model";
     HistoryModule,
   ],
   controllers: [],
-  providers: [],
+  providers: [MockDataService],
 })
 export class AppModule {}

@@ -4,7 +4,6 @@ import { ApiProperty } from "@nestjs/swagger";
 @Table({ tableName: 'users' })
 
 export class User extends Model {
-
   @ApiProperty({ example: 'user@mail.ru', description: 'Mailing address' })
   @Column({ type: DataType.STRING, unique: true, allowNull: false })
   email: string;

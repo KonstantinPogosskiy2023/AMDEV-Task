@@ -11,6 +11,8 @@ import {
 import { SpotService } from './spot.service';
 import { CreateParkingSpotDto } from './dto/create-parking-spot.dto';
 import { JwtAuthGuard } from "../authorization/jwt.auth.guard";
+import { ApiOperation, ApiResponse } from "@nestjs/swagger";
+import { Spot } from "../models/spot/spot.model";
 
 @Controller('parking-spots')
 export class SpotController {
@@ -20,6 +22,8 @@ export class SpotController {
   ) {}
 
   @Post()
+  @ApiOperation({ summary: "Creating parking spot" })
+  @ApiResponse({ status: 200, type: Spot })
   @HttpCode(HttpStatus.CREATED)
   @UseGuards(JwtAuthGuard)
   createSpot(@Body() createParkingSpotDto: CreateParkingSpotDto) {
@@ -27,6 +31,8 @@ export class SpotController {
   }
 
   @Get(':id')
+  @ApiOperation({ summary: "Getting parking spot by ID" })
+  @ApiResponse({ status: 200, type: Spot })
   @UseGuards(JwtAuthGuard)
   @HttpCode(HttpStatus.OK)
   getSpotById(@Param() params) {
@@ -40,6 +46,8 @@ export class SpotController {
   }
 
   @Get()
+  @ApiOperation({ summary: "Getting all parking spots" })
+  @ApiResponse({ status: 200, type: [Spot] })
   @UseGuards(JwtAuthGuard)
   @HttpCode(HttpStatus.OK)
   getAllSpots() {
@@ -47,11 +55,13 @@ export class SpotController {
   }
 
   @Get(':parking_spot_id/available-times')
+  @ApiOperation({ summary: "Getting parking-spot's available time slots" })
+  @ApiResponse({ status: 200, type: String, isArray: true, })
   @UseGuards(JwtAuthGuard)
   getAvailableTimes(
     @Param('parking_spot_id', ParseIntPipe) parkingSpotId: number,
     @Query('date') date: string,
-  ) {
+  ): Promise<string[]> {
     return this.spotService.getAvailableTimes(parkingSpotId, date);
   }
 }

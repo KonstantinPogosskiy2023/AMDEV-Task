@@ -14,6 +14,6 @@ export class HistoryDto {
   @IsString({ message: 'HH:MM:SS' })
   readonly reserved_time: string;
 
-  @IsString({ message: 'Booked' })
+  @IsString({ message: 'booked' })
   readonly status: string;
 }
